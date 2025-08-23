@@ -1,6 +1,6 @@
 # pybacting
 
-[![Tests](https://github.com/cthoyt/pybacting/actions/workflows/tests.yml/badge.svg)](https://github.com/cthoyt/pybacting/actions/workflows/tests.yml)
+[![Tests](https://github.com/BlueObelisk/pybacting/actions/workflows/tests.yml/badge.svg)](https://github.com/BlueObelisk/pybacting/actions/workflows/tests.yml)
 [![PyPI](https://img.shields.io/pypi/v/pybacting)](https://pypi.org/project/pybacting/)
 ![PyPI - License](https://img.shields.io/pypi/l/pybacting)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pybacting)
@@ -41,13 +41,13 @@ $ pip install pybacting
 Install the latest code from GitHub:
 
 ```shell
-$ pip install git+https://github.com/cthoyt/pybacting
+$ pip install git+https://github.com/BlueObelisk/pybacting
 ```
 
 Download and install from source in development mode:
 
 ```shell
-$ git clone https://github.com/cthoyt/pybacting
+$ git clone https://github.com/BlueObelisk/pybacting
 $ cd pybacting
 $ pip install --editable .
 ```
