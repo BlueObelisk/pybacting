@@ -24,7 +24,7 @@ __all__ = [
 ]
 
 WORKSPACE = "."
-VERSION = "1.0.7"
+VERSION = "1.0.10"
 
 # The ones marked with "no" can't be loaded because they are POM-only
 # artifacts. See the excellent explanation given by @ctrueden why at:
@@ -52,6 +52,9 @@ endpoints = (
     f"io.github.egonw.bacting:managers-zenodo:{VERSION}",
 )
 config.endpoints.extend(endpoints)
+
+# We need at least Java 21
+config.set_java_constraints(version="21")
 
 # Connecting to the JVM is usually done implicitly, but since spreading
 # the endpoints and instantiation across many classes causes a problem,

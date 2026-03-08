@@ -31,7 +31,7 @@ print(pybacting.from_smiles("COC"))
 
 ## Installation
 
-Before installing, you'll need to make sure Maven (`mvn`) and Java 17 are available on your
+Before installing, you'll need to make sure Maven (`mvn`) and Java 21 are available on your
 path. If you're on mac, use `brew install maven`.
 
 ```shell
