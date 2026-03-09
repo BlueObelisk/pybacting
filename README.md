@@ -48,8 +48,8 @@ print(pybacting.from_smiles("COC"))
 
 ## 🚀 Installation
 
-Before installing, you'll need to make sure Maven (`mvn`) and Java 21 are available on your
-path. If you're on Mac, use `brew install maven`.
+Before installing, you'll need to make sure Maven (`mvn`) and Java 21 are
+available on your path. If you're on Mac, use `brew install maven`.
 
 The most recent release can be installed from
 [PyPI](https://pypi.org/project/pybacting/) with uv:
