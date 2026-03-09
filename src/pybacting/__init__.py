@@ -1,24 +1,51 @@
-# -*- coding: utf-8 -*-
-
 """A python wrapper around `bacting <https://github.com/egonw/bacting>`_."""
 
-from .api import (  # noqa:F401
+from .api import (
     biojava,
     bridgedb,
     cdk,
+    doi,
+    duckduckgo,
     excel,
     inchi,
     opsin,
     oscar,
     pubchem,
+    pubmed,
     qudt,
     rdf,
+    wikidata,
     xml,
+    zenodo,
 )
-from .io import (  # noqa:F401
+from .io import (
     from_iupac_name,
     from_smiles,
     get_inchi,
     get_inchi_key,
     get_svg,
 )
+
+__all__ = [
+    "biojava",
+    "bridgedb",
+    "cdk",
+    "doi",
+    "duckduckgo",
+    "excel",
+    "from_iupac_name",
+    "from_smiles",
+    "get_inchi",
+    "get_inchi_key",
+    "get_svg",
+    "inchi",
+    "opsin",
+    "oscar",
+    "pubchem",
+    "pubmed",
+    "qudt",
+    "rdf",
+    "wikidata",
+    "xml",
+    "zenodo",
+]

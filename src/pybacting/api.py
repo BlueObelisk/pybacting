@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Java components via :mod:`scyjava`."""
 
 from scyjava import config, jimport, start_jvm
@@ -26,11 +24,11 @@ __all__ = [
 WORKSPACE = "."
 VERSION = "1.0.10"
 
-# The ones marked with "no" can't be loaded because they are POM-only
+# The ones commented out can't be loaded because they are POM-only
 # artifacts. See the excellent explanation given by @ctrueden why at:
 # https://github.com/scijava/scyjava/issues/30#issuecomment-892061823
 endpoints = (
-    # f"io.github.egonw.bacting:managers-semweb:{VERSION}", # no
+    # io.github.egonw.bacting:managers-semweb:{VERSION}
     f"io.github.egonw.bacting:bacting-core:{VERSION}",
     f"io.github.egonw.bacting:managers-cdk:{VERSION}",
     f"io.github.egonw.bacting:net.bioclipse.managers.duckduckgo:{VERSION}",
@@ -39,9 +37,9 @@ endpoints = (
     f"io.github.egonw.bacting:net.bioclipse.managers.pubmed:{VERSION}",
     f"io.github.egonw.bacting:managers-xml:{VERSION}",
     f"io.github.egonw.bacting:managers-rdf:{VERSION}",
-    # f"io.github.egonw.bacting:managers-bioinfo:{VERSION}", # no
+    # io.github.egonw.bacting:managers-bioinfo:{VERSION}
     f"io.github.egonw.bacting:managers-oscar:{VERSION}",
-    # f"io.github.egonw.bacting:managers-cheminfo:{VERSION}",# no
+    # io.github.egonw.bacting:managers-cheminfo:{VERSION}
     f"io.github.egonw.bacting:managers-ui:{VERSION}",
     f"io.github.egonw.bacting:managers-excel:{VERSION}",
     f"io.github.egonw.bacting:managers-opsin:{VERSION}",

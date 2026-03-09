@@ -1,88 +1,115 @@
+# This file configures the continuous integration (CI) system on GitHub.
+# Introductory materials can be found here: https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions.
+# Documentation for editing this file can be found here: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
 name: Tests
 
-on: [ push, pull_request ]
+# by default, give the GITHUB_TOKEN no permissions
+# See https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token
+permissions: {}
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 env:
   JAVA_HOME: '/usr/lib/jvm/java-17-openjdk-amd64/'
 
 jobs:
   lint:
-    name: Lint
+    name: Code Quality
+    permissions:
+      # give only read-only access to the contents of the repository
+      # this is the only permission this job requires, so keep it to the least privilege
+      # i.e., not to issues, discussions, actions, etc.
+      contents: read
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9", "3.13" ]
+        python-version: ["3.14", "3.10"]
+        tox-command: ["lint", "pyroma", "mypy"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Java 21
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: pip install tox
-      - name: Check manifest
-        run: tox -e manifest
-      - name: Check code quality with flake8
-        run: tox -e flake8
-      - name: Check package metadata with Pyroma
-        run: tox -e pyroma
-      - name: Check static typing with MyPy
-        run: tox -e mypy
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
+      - name: "Run command"
+        run: |
+          uvx -p ${{ matrix.python-version }} --with tox-uv tox -e ${{ matrix.tox-command }}
+
   docs:
     name: Documentation
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9", "3.13" ]
+        # We only test documentation on the latest version
+        # sphinx 8.0 / sphinx-rtd-theme 3.0 discontinued Python 3.9 support
+        # a year early, which prompted re-thinking about this.
+        python-version: ["3.14"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Java 21
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
         with:
-          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
       - name: Install dependencies
-        run: pip install tox
-      - name: Check RST conformity with doc8
-        run: tox -e doc8
-      - name: Check docstring coverage
-        run: tox -e docstr-coverage
-      - name: Check documentation build with Sphinx
         run: |
           sudo apt-get install graphviz
-          tox -e docs
+      - name: Lint documentation
+        run: uvx -p ${{ matrix.python-version }} --with tox-uv tox -e docs-lint
+      - name: Check docstring coverage
+        run: uvx -p ${{ matrix.python-version }} --with tox-uv tox -e docstr-coverage
+      - name: Check documentation build with Sphinx
+        run: uvx -p ${{ matrix.python-version }} --with tox-uv tox -e docs-test
+      - name: Lint markdown
+        run: uvx -p ${{ matrix.python-version }} --with tox-uv tox -e lint-markdown
+
   tests:
     name: Tests
+    permissions:
+      contents: read
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-        python-version: [ "3.9", "3.13" ]
+        os: [ubuntu-latest]
+        python-version: ["3.14", "3.10"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Java 21
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: pip install tox
-      - name: Test with pytest
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
+      - name: Test with pytest and generate coverage file
         run:
-          tox -e py
-      - name: Doctests
+          uvx -p ${{ matrix.python-version }} --with tox-uv tox -e py
+      - name: Run doctests
         run:
-          tox -e doctests
+          uvx -p ${{ matrix.python-version }} --with tox-uv tox -e doctests
+      - name: Upload coverage report to codecov
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        if: success()
+        with:
+          file: coverage.xml
