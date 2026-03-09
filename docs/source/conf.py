@@ -224,6 +224,7 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "pandas": ("https://pandas.pydata.org/docs", None),
 }
 
 autoclass_content = 'both'

@@ -1,17 +1,19 @@
-PyBacting |release| Documentation
-===================================
-.. automodule:: pybacting
+###################################
+ PyBacting |release| Documentation
+###################################
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Getting Started
-   :name: start
+    :maxdepth: 2
+    :caption: Getting Started
+    :name: start
 
-   installation
-   managers
+    installation
+    managers
 
-Indices and Tables
-------------------
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+********************
+ Indices and Tables
+********************
+
+- :ref:`genindex`
+- :ref:`modindex`
+- :ref:`search`
