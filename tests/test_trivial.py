@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Trivial tests for :mod:`pybacting`."""
 
 import unittest

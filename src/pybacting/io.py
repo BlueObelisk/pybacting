@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Wrappers around I/O functions in bacting."""
 
 from typing import Any
@@ -8,6 +6,16 @@ from scyjava import to_python
 
 from .api import cdk, inchi, opsin
 
+__all__ = [
+    "from_iupac_name",
+    "from_smiles",
+    "get_inchi",
+    "get_inchi_key",
+    "get_svg",
+    "Molecule",
+]
+
+#: A type describing a molecule
 Molecule = Any
 
 
@@ -34,7 +42,3 @@ def get_inchi_key(mol: Molecule) -> str:
 def get_svg(mol: Molecule) -> str:
     """Get an SVG depicting for a molecule."""
     return to_python(cdk.asSVG(mol))
-
-
-if __name__ == "__main__":
-    print(from_smiles("COC"))

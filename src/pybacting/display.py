@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Display functions."""
 
 from typing import TYPE_CHECKING
