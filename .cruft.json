@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/cthoyt/cookiecutter-snekpack",
-  "commit": "ea65caae6a5a61011eaf4512fff1bbf1d4c643b1",
+  "commit": "068ccad44f88184507d9bac40f955cb9740b24c1",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -26,7 +26,7 @@
       "__gh_slug": "BlueObelisk/pybacting",
       "__package_name_dashed": "pybacting",
       "_template": "https://github.com/cthoyt/cookiecutter-snekpack",
-      "_commit": "ea65caae6a5a61011eaf4512fff1bbf1d4c643b1"
+      "_commit": "068ccad44f88184507d9bac40f955cb9740b24c1"
     }
   },
   "directory": null
