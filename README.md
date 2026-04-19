@@ -80,7 +80,7 @@ $ python3 -m pip install git+https://github.com/BlueObelisk/pybacting.git
 
 Contributions, whether filing an issue, making a pull request, or forking, are
 appreciated. See
-[CONTRIBUTING.md](https://github.com/BlueObelisk/pybacting/blob/master/.github/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/BlueObelisk/pybacting/blob/main/.github/CONTRIBUTING.md)
 for more information on getting involved.
 
 ## 👋 Attribution
